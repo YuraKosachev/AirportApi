@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using System;
 using System.IO;
@@ -33,6 +34,12 @@ namespace FlightInfo.Server
             services.AddTransient<IAirportInfoByNameApiProvider, AirportInfoByNameApiProvider>();
             services.AddSwaggerGen(option =>
             {
+                var info = new OpenApiInfo
+                {
+                    Title = "FlightInfoApi",
+                    Version = "v1"
+                };
+                option.SwaggerDoc("v1",info);
                 option.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, Assembly.GetExecutingAssembly().GetName().Name + ".xml"));
                 option.SchemaFilter<EnumSchemaFilter>();
             });
@@ -42,7 +49,7 @@ namespace FlightInfo.Server
                 .AddJsonOptions(options =>
                 {
                     options.SerializerSettings.Converters.Add(new StringEnumConverter());
-                });//.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

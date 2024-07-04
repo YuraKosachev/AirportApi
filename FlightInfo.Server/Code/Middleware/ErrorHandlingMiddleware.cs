@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using System.Net;
-using System.Threading.Tasks;
-using System;
+﻿using FlightInfo.Common.Constants;
 using FlightInfo.Common.Exceptions;
 using FlightInfo.Common.Models.Error;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using FlightInfo.Common.Constants;
-
+using System.Net;
+using System.Threading.Tasks;
 
 namespace FlightInfo.Server.Code.Middleware
 {
